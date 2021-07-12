@@ -10,16 +10,17 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView text1, text2;
-    CheckBox chkAgree;
+    Switch chkAgree;
     RadioGroup rGroup1;
-    RadioButton rdoDog, rdoCat, rdoRabbit;
-    Button btnOK;
-    ImageView imgPet;
+    RadioButton rdoOreo, rdoPie, rdoQ;
+    Button btnR, btnF;
+    ImageView imgAndroid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
         chkAgree = findViewById(R.id.ChkAgree);
         text2 = findViewById(R.id.text2);
         rGroup1= findViewById(R.id.Rgroup1);
-        rdoDog = findViewById(R.id.RdoDog);
-        rdoCat = findViewById(R.id.RdoCat);
-        rdoRabbit = findViewById(R.id.RdoRabbit);
-        btnOK = findViewById(R.id.BtnOK);
-        imgPet = findViewById(R.id.ImgPet);
+        btnF = findViewById(R.id.BtnF);
+        btnR = findViewById(R.id.BtnR);
+        findViewById(R.id.Rdooreo).setOnClickListener(this);
+        findViewById(R.id.Rdopie).setOnClickListener(this);
+        findViewById(R.id.Rdoq).setOnClickListener(this);
+        findViewById(R.id.BtnR).setOnClickListener(this);
+        findViewById(R.id.BtnF).setOnClickListener(this);
+        imgAndroid = findViewById(R.id.ImgAndroid);
+
 
         chkAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -43,33 +48,41 @@ public class MainActivity extends AppCompatActivity {
                 if(chkAgree.isChecked()==true){
                     text2.setVisibility(View.VISIBLE);
                     rGroup1.setVisibility(View.VISIBLE);
-                    btnOK.setVisibility(View.VISIBLE);
-                    imgPet.setVisibility(View.VISIBLE);
+                    btnF.setVisibility(View.VISIBLE);
+                    btnR.setVisibility(View.VISIBLE);
+                    imgAndroid.setVisibility(View.VISIBLE);
                 }else {
                     text2.setVisibility(View.INVISIBLE);
                     rGroup1.setVisibility(View.INVISIBLE);
-                    btnOK.setVisibility(View.INVISIBLE);
-                    imgPet.setVisibility(View.INVISIBLE);
+                    imgAndroid.setVisibility(View.INVISIBLE);
+                    btnF.setVisibility(View.INVISIBLE);
+                    btnR.setVisibility(View.INVISIBLE);
                 }
+
             }
         });
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (rGroup1.getCheckedRadioButtonId()){
-                    case R.id.RdoDog:
-                        imgPet.setImageResource(R.drawable.dog);
-                        break;
-                    case R.id.RdoCat:
-                        imgPet.setImageResource(R.drawable.cat);
-                        break;
-                    case R.id.RdoRabbit:
-                        imgPet.setImageResource(R.drawable.rabbit);
-                        break;
-                    default:
-                        Toast.makeText(MainActivity.this, "동물 먼저 선택하세요", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.Rdooreo:
+                imgAndroid.setImageResource(R.drawable.oreo);
+                break;
+            case R.id.Rdopie:
+                imgAndroid.setImageResource(R.drawable.pie);
+                break;
+            case R.id.Rdoq:
+                imgAndroid.setImageResource(R.drawable.q10);
+                break;
+            case R.id.BtnF:
+                finish();
+                break;
+            case R.id.BtnR:
+                imgAndroid.setImageResource(0);
+                chkAgree.setChecked(false);
+                break;
+        }
     }
 }
